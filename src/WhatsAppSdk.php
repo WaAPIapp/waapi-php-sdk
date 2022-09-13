@@ -47,14 +47,17 @@ class WhatsAppSdk
      * Create a new WhatsAppSdk instance.
      *
      * @param  string|null  $apiKey
+     * @param  bool  $testMode
      * @param  HttpClient|null  $guzzle
      * @return void
      */
-    public function __construct($apiKey = null, HttpClient $guzzle = null)
+    public function __construct($apiKey = null, $testMode = false, HttpClient $guzzle = null)
     {
         if (! is_null($apiKey)) {
             $this->setApiKey($apiKey, $guzzle);
         }
+
+        $this->testMode = $testMode;
 
         if (! is_null($guzzle)) {
             $this->guzzle = $guzzle;
