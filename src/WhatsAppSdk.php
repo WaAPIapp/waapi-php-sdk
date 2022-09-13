@@ -12,8 +12,8 @@ class WhatsAppSdk
     use CheckApiAvailable;
     use ManagesInstances;
 
-    private const TEST_BASE_URL = 'https://dev-wa-proxy.eazeapps.io/api';
-    private const LIVE_BASE_URL = 'https://wa-proxy.eazeapps.io/api';
+    private const TEST_BASE_URL = 'https://dev-wa-proxy.eazeapps.io';
+    private const LIVE_BASE_URL = 'https://wa-proxy.eazeapps.io';
 
     /**
      * If the test or live environment should be used
@@ -58,7 +58,6 @@ class WhatsAppSdk
         if (! is_null($apiKey)) {
             $this->setApiKey($apiKey, $guzzle);
         }
-
 
         if (! is_null($guzzle)) {
             $this->guzzle = $guzzle;

@@ -20,7 +20,7 @@ trait CheckApiAvailable
      */
     public function isApiAvailable()
     {
-        return $this->get("ping") == 'pong';
+        return $this->get("api/ping") == 'pong';
     }
 
 }

@@ -26,7 +26,7 @@ trait ManagesInstances
     public function instances()
     {
         return $this->transformCollection(
-            $this->get('v1/instances')['instances'],
+            $this->get('api/v1/instances')['instances'],
             Instance::class
         );
     }
@@ -41,7 +41,7 @@ trait ManagesInstances
      */
     public function getInstance($instanceId)
     {
-        $data = $this->get("v1/instances/{$instanceId}")['instance'];
+        $data = $this->get("api/v1/instances/{$instanceId}")['instance'];
 
         return new Instance($data, $this);
     }
@@ -56,7 +56,7 @@ trait ManagesInstances
      */
     public function getInstanceClientStatus($instanceId)
     {
-        $data = $this->get("v1/instances/{$instanceId}/client/status")['clientStatus'];
+        $data = $this->get("api/v1/instances/{$instanceId}/client/status")['clientStatus'];
 
         return new InstanceClientStatus($data, $this);
     }
@@ -72,7 +72,7 @@ trait ManagesInstances
      */
     public function getInstanceClientQrCode($instanceId)
     {
-        $data = $this->get("v1/instances/{$instanceId}/client/qr")['qrCode'];
+        $data = $this->get("api/v1/instances/{$instanceId}/client/qr")['qrCode'];
 
         return new InstanceClientQrCode($data, $this);
     }
@@ -88,7 +88,7 @@ trait ManagesInstances
      */
     public function getInstanceClientInfo($instanceId)
     {
-        $data = $this->get("v1/instances/{$instanceId}/client/me")['me'];
+        $data = $this->get("api/v1/instances/{$instanceId}/client/me")['me'];
 
         return new InstanceClientMe($data, $this);
     }
@@ -102,7 +102,7 @@ trait ManagesInstances
      */
     public function createInstance()
     {
-        $data = $this->post("v1/instances")['instance'];
+        $data = $this->post("api/v1/instances")['instance'];
 
         return new Instance($data, $this);
     }
@@ -119,7 +119,7 @@ trait ManagesInstances
      */
     public function updateInstance($instanceId, $webhookUrl = null, $webhookEvents = [])
     {
-        $data = $this->put("v1/instances/{$instanceId}", [
+        $data = $this->put("api/v1/instances/{$instanceId}", [
             'webhook' => [
                 'url' => $webhookUrl,
                 'events' => $webhookEvents ?? []
@@ -139,7 +139,7 @@ trait ManagesInstances
      */
     public function deleteInstance($instanceId)
     {
-        $this->delete("v1/instances/{$instanceId}");
+        $this->delete("api/v1/instances/{$instanceId}");
     }
 
 
@@ -155,7 +155,7 @@ trait ManagesInstances
      */
     public function executeInstanceAction($instanceId, $actionName, $requestData = [])
     {
-        $data = $this->post("v1/instances/{$instanceId}/client/action/{$actionName}", $requestData)['data'];
+        $data = $this->post("api/v1/instances/{$instanceId}/client/action/{$actionName}", $requestData)['data'];
 
         return new ExecutedAction($data, $this);
     }
