@@ -1,5 +1,10 @@
 <?php
 
+namespace Eaze\WhatsAppPhpSdk\Resources;
+
+use Eaze\WhatsAppPhpSdk\Exceptions\FailedActionException;
+use Eaze\WhatsAppPhpSdk\Exceptions\NotFoundException;
+use Eaze\WhatsAppPhpSdk\Exceptions\ValidationException;
 use GuzzleHttp\Exception\GuzzleException;
 
 class Instance extends Resource

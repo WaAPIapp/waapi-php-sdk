@@ -1,5 +1,9 @@
 <?php
 
+namespace Eaze\WhatsAppPhpSdk\Exceptions;
+
+use Exception;
+
 class TimeoutException extends Exception
 {
     /**

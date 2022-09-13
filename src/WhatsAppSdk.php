@@ -1,5 +1,9 @@
 <?php
 
+namespace Eaze\WhatsAppPhpSdk;
+
+use Eaze\WhatsAppPhpSdk\Actions\CheckApiAvailable;
+use Eaze\WhatsAppPhpSdk\Actions\ManagesInstances;
 use GuzzleHttp\Client as HttpClient;
 
 class WhatsAppSdk

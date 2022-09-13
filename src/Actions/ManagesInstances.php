@@ -1,5 +1,16 @@
 <?php
 
+namespace Eaze\WhatsAppPhpSdk\Actions;
+
+use Eaze\WhatsAppPhpSdk\Exceptions\FailedActionException;
+use Eaze\WhatsAppPhpSdk\Exceptions\NotFoundException;
+use Eaze\WhatsAppPhpSdk\Exceptions\ValidationException;
+use Eaze\WhatsAppPhpSdk\Resources\ExecutedAction;
+use Eaze\WhatsAppPhpSdk\Resources\Instance;
+use Eaze\WhatsAppPhpSdk\Resources\InstanceClientMe;
+use Eaze\WhatsAppPhpSdk\Resources\InstanceClientQrCode;
+use Eaze\WhatsAppPhpSdk\Resources\InstanceClientStatus;
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 
 trait ManagesInstances

@@ -1,5 +1,9 @@
 <?php
 
+namespace Eaze\WhatsAppPhpSdk\Resources;
+
+use Eaze\WhatsAppPhpSdk\WhatsAppSdk;
+
 class Resource
 {
     /**

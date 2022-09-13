@@ -1,5 +1,12 @@
 <?php
 
+namespace Eaze\WhatsAppPhpSdk;
+
+use Eaze\WhatsAppPhpSdk\Exceptions\FailedActionException;
+use Eaze\WhatsAppPhpSdk\Exceptions\NotFoundException;
+use Eaze\WhatsAppPhpSdk\Exceptions\TimeoutException;
+use Eaze\WhatsAppPhpSdk\Exceptions\ValidationException;
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 

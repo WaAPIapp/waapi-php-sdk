@@ -1,5 +1,11 @@
 <?php
 
+namespace Eaze\WhatsAppPhpSdk\Actions;
+
+use Eaze\WhatsAppPhpSdk\Exceptions\FailedActionException;
+use Eaze\WhatsAppPhpSdk\Exceptions\NotFoundException;
+use Eaze\WhatsAppPhpSdk\Exceptions\ValidationException;
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 
 trait CheckApiAvailable

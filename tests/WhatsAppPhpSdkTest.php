@@ -1,8 +1,10 @@
 <?php
 
+namespace Eaze\WhatsAppPhpSdk\Tests;
+
 use PHPUnit\Framework\TestCase;
 
-class WhatsappPhpSdkTest extends TestCase
+class WhatsAppPhpSdkTest extends TestCase
 {
 
     public function test_test()

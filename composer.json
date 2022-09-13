@@ -6,12 +6,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Eaze\\WhatsappPhpSdk\\": "src/"
+            "Eaze\\WhatsAppPhpSdk\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Eaze\\WhatsAppPhpSdk\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",
@@ -25,5 +25,8 @@
         "php": "^7.2|^8.0",
         "ext-json": "*",
         "guzzlehttp/guzzle": "^6.3.1|^7.5"
+    },
+    "config": {
+        "sort-packages": true
     }
 }
