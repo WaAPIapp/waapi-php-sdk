@@ -122,8 +122,8 @@ trait MakesHttpRequests
         $responseBodyArr = json_decode($responseBody, true);
 
         if ($responseBodyArr != null && $checkBodyStatus) {
-            $status = $responseBodyArr['status'];
-            if (!$status) {
+            $status = $responseBodyArr['status'] ?? null;
+            if ($status != 'success') {
                 return $this->handleRequestError($response);
             }
         }
