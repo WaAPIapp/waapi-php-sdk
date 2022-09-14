@@ -1,0 +1,16 @@
+image: lorisleiva/laravel-docker:8.1
+
+stages:
+  - test
+
+phpstan:
+  stage: test
+  script:
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - php vendor/bin/phpstan
+
+phpunit:
+  stage: test
+  script:
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - phpunit --coverage-text --colors=never

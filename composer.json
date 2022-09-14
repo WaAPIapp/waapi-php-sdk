@@ -1,0 +1,32 @@
+{
+    "name": "eaze/whatsapp-php-sdk",
+    "description": "The official EAZE WhatsApp PHP SDK",
+    "keywords": ["eaze", "whatsapp", "api", "sdk", "library"],
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Eaze\\WhatsAppPhpSdk\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Eaze\\WhatsAppPhpSdk\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "phpunit/phpunit": "^8.4|^9.5",
+        "mockery/mockery": "^1.5",
+        "phpstan/phpstan": "^1.8"
+    },
+    "require": {
+        "php": "^7.2|^8.0",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.3.1|^7.5"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
