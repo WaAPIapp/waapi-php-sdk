@@ -1,10 +1,10 @@
 <?php
 
-namespace Eaze\WhatsAppPhpSdk\Actions;
+namespace WaAPI\WaAPISdk\Actions;
 
-use Eaze\WhatsAppPhpSdk\Exceptions\FailedActionException;
-use Eaze\WhatsAppPhpSdk\Exceptions\NotFoundException;
-use Eaze\WhatsAppPhpSdk\Exceptions\ValidationException;
+use WaAPI\WaAPISdk\Exceptions\FailedActionException;
+use WaAPI\WaAPISdk\Exceptions\NotFoundException;
+use WaAPI\WaAPISdk\Exceptions\ValidationException;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 

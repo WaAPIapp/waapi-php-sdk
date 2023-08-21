@@ -1,15 +1,15 @@
 <?php
 
-namespace Eaze\WhatsAppPhpSdk\Actions;
+namespace WaAPI\WaAPISdk\Actions;
 
-use Eaze\WhatsAppPhpSdk\Exceptions\FailedActionException;
-use Eaze\WhatsAppPhpSdk\Exceptions\NotFoundException;
-use Eaze\WhatsAppPhpSdk\Exceptions\ValidationException;
-use Eaze\WhatsAppPhpSdk\Resources\ExecutedAction;
-use Eaze\WhatsAppPhpSdk\Resources\Instance;
-use Eaze\WhatsAppPhpSdk\Resources\InstanceClientMe;
-use Eaze\WhatsAppPhpSdk\Resources\InstanceClientQrCode;
-use Eaze\WhatsAppPhpSdk\Resources\InstanceClientStatus;
+use WaAPI\WaAPISdk\Exceptions\FailedActionException;
+use WaAPI\WaAPISdk\Exceptions\NotFoundException;
+use WaAPI\WaAPISdk\Exceptions\ValidationException;
+use WaAPI\WaAPISdk\Resources\ExecutedAction;
+use WaAPI\WaAPISdk\Resources\Instance;
+use WaAPI\WaAPISdk\Resources\InstanceClientMe;
+use WaAPI\WaAPISdk\Resources\InstanceClientQrCode;
+use WaAPI\WaAPISdk\Resources\InstanceClientStatus;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 

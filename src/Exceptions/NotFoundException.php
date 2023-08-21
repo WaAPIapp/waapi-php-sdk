@@ -1,6 +1,6 @@
 <?php
 
-namespace Eaze\WhatsAppPhpSdk\Exceptions;
+namespace WaAPI\WaAPISdk\Exceptions;
 
 use Exception;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Eaze\WhatsAppPhpSdk\Tests;
+namespace WaAPI\WaAPISdk\Tests;
 
 use PHPUnit\Framework\TestCase;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Eaze\WhatsAppPhpSdk\Resources;
+namespace WaAPI\WaAPISdk\Resources;
 
-use Eaze\WhatsAppPhpSdk\WhatsAppSdk;
+use WaAPI\WaAPISdk\WaAPISdk;
 
 class Resource
 {
@@ -16,7 +16,7 @@ class Resource
     /**
      * The Forge SDK instance.
      *
-     * @var WhatsAppSdk|null
+     * @var WaAPISdk|null
      */
     protected $whatsAppSdk;
 
@@ -24,7 +24,7 @@ class Resource
      * Create a new resource instance.
      *
      * @param array $attributes
-     * @param WhatsAppSdk|null $whatsAppSdk
+     * @param WaAPISdk|null $whatsAppSdk
      * @return void
      */
     public function __construct(array $attributes, $whatsAppSdk = null)

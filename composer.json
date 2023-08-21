@@ -1,17 +1,17 @@
 {
-    "name": "eaze/whatsapp-php-sdk",
+    "name": "waapi/waapi-php-sdk",
     "description": "The official EAZE WhatsApp PHP SDK",
     "keywords": ["eaze", "whatsapp", "api", "sdk", "library"],
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Eaze\\WhatsAppPhpSdk\\": "src/"
+            "WaAPI\\WaAPISdk\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Eaze\\WhatsAppPhpSdk\\Tests\\": "tests/"
+            "WaAPI\\WaAPISdk\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",

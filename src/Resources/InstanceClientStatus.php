@@ -1,10 +1,10 @@
 <?php
 
-namespace Eaze\WhatsAppPhpSdk\Resources;
+namespace WaAPI\WaAPISdk\Resources;
 
-use Eaze\WhatsAppPhpSdk\Exceptions\FailedActionException;
-use Eaze\WhatsAppPhpSdk\Exceptions\NotFoundException;
-use Eaze\WhatsAppPhpSdk\Exceptions\ValidationException;
+use WaAPI\WaAPISdk\Exceptions\FailedActionException;
+use WaAPI\WaAPISdk\Exceptions\NotFoundException;
+use WaAPI\WaAPISdk\Exceptions\ValidationException;
 use GuzzleHttp\Exception\GuzzleException;
 
 class InstanceClientStatus extends Resource
