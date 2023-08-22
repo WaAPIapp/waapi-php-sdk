@@ -12,15 +12,7 @@ class WaAPISdk
     use CheckApiAvailable;
     use ManagesInstances;
 
-    private const TEST_BASE_URL = 'https://dev-wa-proxy.eazeapps.io';
-    private const LIVE_BASE_URL = 'https://wa-proxy.eazeapps.io';
-
-    /**
-     * If the test or live environment should be used
-     *
-     * @var bool
-     */
-    protected $testMode;
+    private const BASE_URL = 'https://waapi.app';
 
     /**
      * The EAZE WhatsApp API Key,
@@ -51,10 +43,8 @@ class WaAPISdk
      * @param  HttpClient|null  $guzzle
      * @return void
      */
-    public function __construct($apiKey = null, $testMode = false, HttpClient $guzzle = null)
+    public function __construct($apiKey = null, HttpClient $guzzle = null)
     {
-        $this->testMode = $testMode;
-
         if (! is_null($apiKey)) {
             $this->setApiKey($apiKey, $guzzle);
         }
@@ -91,7 +81,7 @@ class WaAPISdk
         $this->apiKey = $apiKey;
 
         $this->guzzle = $guzzle ?: new HttpClient([
-            'base_uri' => $this->testMode ? self::TEST_BASE_URL : self::LIVE_BASE_URL,
+            'base_uri' => self::BASE_URL,
             'http_errors' => false,
             'headers' => [
                 'Authorization' => 'Bearer ' . $this->apiKey,
