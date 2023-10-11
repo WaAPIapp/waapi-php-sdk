@@ -34,13 +34,13 @@ $sdk = new WaAPISdk($apiToken);
 ### Check if WhatsApp API is available
 
 ```php
-$isAvailable = $this->sdk->isApiAvailable();
+$isAvailable = $sdk->isApiAvailable();
 ```
 
 ### Create a new instance
 
 ```php
-$instance = $this->sdk->createInstance();
+$instance = $sdk->createInstance();
 $instanceId = $instance->id;
 ```
 
@@ -48,7 +48,7 @@ $instanceId = $instance->id;
 
 ```php
 $instanceId = 10; //you need to know your instance id at this point
-$instance = $this->sdk->getInstance($instanceId);
+$instance = $sdk->getInstance($instanceId);
 ```
 
 ### Update an existing instance
@@ -61,10 +61,10 @@ $instanceId = 10; //you need to know your instance id at this point
 $webhookUrl = '';
 $subscribedEvents = ['', '']; //can also be null or an empty array
 
-$this->sdk->updateInstance($instanceId, $webhookUrl, $subscribedEvents);
+$sdk->updateInstance($instanceId, $webhookUrl, $subscribedEvents);
 
 //if you have an instance object, you can also use the following method
-$instance = $this->sdk->getInstance($instanceId);
+$instance = $sdk->getInstance($instanceId);
 $instance->update($webhookUrl, $subscribedEvents);
 ```
 
@@ -72,25 +72,24 @@ $instance->update($webhookUrl, $subscribedEvents);
 
 ```php
 $instanceId = 10; //you need to know your instance id at this point
-$this->sdk->deleteInstance($instanceId);
+$sdk->deleteInstance($instanceId);
 
 //if you have an instance object, you can also use the following method to delete this instance
-$instance = $this->sdk->getInstance($instanceId);
+$instance = $sdk->getInstance($instanceId);
 $instance->delete();
 ```
 
 ### Get the QR-Code
 
 After creating a new instance, you need to connect your WhatsApp phone number with this instance.
-[Follow this guide](/docs/1.0/setup-whatsapp-business) if you do not know how to do this.
 With the following code, you are able to receive the current QR-Code.
 
 ```php
 $instanceId = 10; //you need to know your instance id at this point
-$response = $this->sdk->getInstanceClientQrCode($instanceId);
+$response = $sdk->getInstanceClientQrCode($instanceId);
 
 //if you have an instance object, you can also use the following method to delete this instance
-$instance = $this->sdk->getInstance($instanceId);
+$instance = $sdk->getInstance($instanceId);
 $response = $instance->clientQrCode();
 
 // The QR code as a base64 image string (data:image/png;base64,…).
@@ -114,10 +113,10 @@ An instance always has a status.
 
 ```php
 $instanceId = 10; //you need to know your instance id at this point
-$response = $this->sdk->getInstanceClientStatus($instanceId);
+$response = $sdk->getInstanceClientStatus($instanceId);
 
 //if you have an instance object, you can also use the following method to delete this instance
-$instance = $this->sdk->getInstance($instanceId);
+$instance = $sdk->getInstance($instanceId);
 $response = $instance->clientStatus();
 
 $instanceStatus = $response->instanceStatus;
@@ -127,10 +126,10 @@ $instanceStatus = $response->instanceStatus;
 
 ```php
 $instanceId = 10; //you need to know your instance id at this point
-$response = $this->sdk->getInstanceClientInfo($instanceId);
+$response = $sdk->getInstanceClientInfo($instanceId);
 
 //if you have an instance object, you can also use the following method to delete this instance
-$instance = $this->sdk->getInstance($instanceId);
+$instance = $sdk->getInstance($instanceId);
 $response = $instance->clientInfo();
 
 //your public name of your WhatsApp profile (your name)
