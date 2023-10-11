@@ -25,10 +25,10 @@ composer require waapi/waapi-php-sdk
 ### Initial Setup
 
 ```php
-use WaAPI\WaAPISdk\WhatsAppSdk;
+use WaAPI\WaAPISdk\WaAPISdk;
 
 $apiToken = 'xxxxxxxxxxxxxxxxxxxxxx';
-$sdk = new WhatsAppSdk($apiToken);
+$sdk = new WaAPISdk($apiToken);
 ```
 
 ### Check if WhatsApp API is available
