@@ -18,6 +18,13 @@ class Instance extends Resource
     public $id;
 
     /**
+     * The name of this instance.
+     *
+     * @var string|null
+     */
+    public $name;
+
+    /**
      * The email address of the owner (user) of this instance.
      *
      * @var string
@@ -41,15 +48,16 @@ class Instance extends Resource
     /**
      * @param string|null $webhookUrl
      * @param string[]|null $webhookEvents
-     * @return InstanceClientStatus
+     * @param string|null $name
+     * @return Instance
      *
      * @throws FailedActionException
      * @throws NotFoundException
      * @throws ValidationException
      * @throws GuzzleException
      */
-    public function update($webhookUrl = null, $webhookEvents = []) {
-        return $this->whatsAppSdk->updateInstance($this->id, $webhookUrl, $webhookEvents);
+    public function update($webhookUrl = null, $webhookEvents = [], $name = null) {
+        return $this->whatsAppSdk->updateInstance($this->id, $webhookUrl, $webhookEvents, $name);
     }
 
     /**
@@ -98,6 +106,19 @@ class Instance extends Resource
      */
     public function clientInfo() {
         return $this->whatsAppSdk->getInstanceClientInfo($this->id);
+    }
+
+    /**
+     * @param string $reference
+     * @return array
+     *
+     * @throws FailedActionException
+     * @throws GuzzleException
+     * @throws NotFoundException
+     * @throws ValidationException
+     */
+    public function requestStatus($reference) {
+        return $this->whatsAppSdk->getInstanceRequestStatus($this->id, $reference);
     }
 
     /**

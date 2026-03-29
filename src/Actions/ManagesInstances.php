@@ -94,15 +94,31 @@ trait ManagesInstances
     }
 
     /**
-     * Create a new instance. If you want to set a webhook or subscribe to events, update the instance afterwards.
+     * Create a new instance.
      *
+     * @param string|null $name
+     * @param string|null $webhookUrl
+     * @param string[]|null $webhookEvents
      * @return Instance
      *
      * @throws Exception | FailedActionException | NotFoundException | ValidationException | GuzzleException
      */
-    public function createInstance()
+    public function createInstance($name = null, $webhookUrl = null, $webhookEvents = [])
     {
-        $data = $this->post("api/v1/instances")['instance'];
+        $payload = [];
+
+        if ($name !== null) {
+            $payload['name'] = $name;
+        }
+
+        if ($webhookUrl !== null || !empty($webhookEvents)) {
+            $payload['webhook'] = [
+                'url' => $webhookUrl,
+                'events' => $webhookEvents ?? [],
+            ];
+        }
+
+        $data = $this->post("api/v1/instances", $payload)['instance'];
 
         return new Instance($data, $this);
     }
@@ -113,20 +129,27 @@ trait ManagesInstances
      * @param int|string $instanceId
      * @param string|null $webhookUrl
      * @param string[]|null $webhookEvents
-     * @return InstanceClientStatus
+     * @param string|null $name
+     * @return Instance
      *
      * @throws Exception | FailedActionException | NotFoundException | ValidationException | GuzzleException
      */
-    public function updateInstance($instanceId, $webhookUrl = null, $webhookEvents = [])
+    public function updateInstance($instanceId, $webhookUrl = null, $webhookEvents = [], $name = null)
     {
-        $data = $this->put("api/v1/instances/{$instanceId}", [
-            'webhook' => [
-                'url' => $webhookUrl,
-                'events' => $webhookEvents ?? []
-            ]
-        ])['data'];
+        $payload = [];
 
-        return new InstanceClientStatus($data, $this);
+        if ($name !== null) {
+            $payload['name'] = $name;
+        }
+
+        $payload['webhook'] = [
+            'url' => $webhookUrl,
+            'events' => $webhookEvents ?? [],
+        ];
+
+        $data = $this->put("api/v1/instances/{$instanceId}", $payload)['data'];
+
+        return new Instance($data, $this);
     }
 
     /**
@@ -142,6 +165,20 @@ trait ManagesInstances
         $this->delete("api/v1/instances/{$instanceId}");
     }
 
+
+    /**
+     * Get the status of an async request by its reference UUID.
+     *
+     * @param int|string $instanceId
+     * @param string $reference
+     * @return array
+     *
+     * @throws Exception | FailedActionException | NotFoundException | ValidationException | GuzzleException
+     */
+    public function getInstanceRequestStatus($instanceId, $reference)
+    {
+        return $this->get("api/v1/instances/{$instanceId}/request/{$reference}");
+    }
 
     /**
      * Execute an action on the given instance. Each action returns individual/different data.

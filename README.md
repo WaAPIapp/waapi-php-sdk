@@ -40,8 +40,16 @@ $isAvailable = $sdk->isApiAvailable();
 ### Create a new instance
 
 ```php
+// Create a basic instance
 $instance = $sdk->createInstance();
 $instanceId = $instance->id;
+
+// Create an instance with a name and webhook
+$instance = $sdk->createInstance(
+    name: 'My Instance',
+    webhookUrl: 'https://my.url.com/webhook/handler',
+    webhookEvents: ['message', 'ready', 'qr']
+);
 ```
 
 ### Get an existing instance
@@ -62,6 +70,9 @@ $webhookUrl = '';
 $subscribedEvents = ['', '']; //can also be null or an empty array
 
 $sdk->updateInstance($instanceId, $webhookUrl, $subscribedEvents);
+
+// You can also update the instance name
+$sdk->updateInstance($instanceId, name: 'New Name');
 
 //if you have an instance object, you can also use the following method
 $instance = $sdk->getInstance($instanceId);
@@ -88,12 +99,12 @@ With the following code, you are able to receive the current QR-Code.
 $instanceId = 10; //you need to know your instance id at this point
 $response = $sdk->getInstanceClientQrCode($instanceId);
 
-//if you have an instance object, you can also use the following method to delete this instance
+//if you have an instance object, you can also use the convenience method
 $instance = $sdk->getInstance($instanceId);
 $response = $instance->clientQrCode();
 
 // The QR code as a base64 image string (data:image/png;base64,…).
-// Set this string in the src attribute of a <img src=““> html tag.
+// Set this string in the src attribute of a <img src=””> html tag.
 $qrCode = $response->qrCode;
 ```
 
@@ -115,7 +126,7 @@ An instance always has a status.
 $instanceId = 10; //you need to know your instance id at this point
 $response = $sdk->getInstanceClientStatus($instanceId);
 
-//if you have an instance object, you can also use the following method to delete this instance
+//if you have an instance object, you can also use the convenience method
 $instance = $sdk->getInstance($instanceId);
 $response = $instance->clientStatus();
 
@@ -128,7 +139,7 @@ $instanceStatus = $response->instanceStatus;
 $instanceId = 10; //you need to know your instance id at this point
 $response = $sdk->getInstanceClientInfo($instanceId);
 
-//if you have an instance object, you can also use the following method to delete this instance
+//if you have an instance object, you can also use the convenience method
 $instance = $sdk->getInstance($instanceId);
 $response = $instance->clientInfo();
 
@@ -144,6 +155,87 @@ $profileUrl = $response->profilePicUrl;
 //a unique identifier for your WhatsApp account / profile / phone number
 $whatsAppId = $response->contactId;
 ```
+
+### Execute actions
+
+Once your instance is in `ready` state, you can execute WhatsApp actions:
+
+```php
+$instanceId = 10;
+
+// Send a text message
+$result = $sdk->executeInstanceAction($instanceId, 'send-message', [
+    'chatId' => '491234567890@c.us',
+    'message' => 'Hello from waapi!',
+]);
+
+// Send media
+$result = $sdk->executeInstanceAction($instanceId, 'send-media', [
+    'chatId' => '491234567890@c.us',
+    'mediaUrl' => 'https://example.com/image.png',
+    'mediaCaption' => 'Check this out!',
+]);
+
+// Using the instance object
+$instance = $sdk->getInstance($instanceId);
+$result = $instance->executeClientAction('send-message', [
+    'chatId' => '491234567890@c.us',
+    'message' => 'Hello!',
+]);
+```
+
+Common actions: `send-message`, `send-media`, `send-location`, `send-vcard`, `get-chats`, `get-contacts`, `get-contact-by-id`, `is-registered-user`, `get-number-id`, `send-seen`, `logout`, `reboot`.
+
+For a full list of available actions and their parameters, see the [API documentation](https://waapi.readme.io).
+
+### Webhook events
+
+When configuring webhooks, use the `WebhookEvent` class for available event constants:
+
+```php
+use WaAPI\WaAPISdk\Resources\WebhookEvent;
+
+$sdk->createInstance(
+    name: 'My Instance',
+    webhookUrl: 'https://my.url.com/webhook',
+    webhookEvents: [
+        WebhookEvent::MESSAGE,
+        WebhookEvent::READY,
+        WebhookEvent::QR,
+        WebhookEvent::DISCONNECTED,
+    ]
+);
+
+// Subscribe to all events
+$sdk->createInstance(
+    name: 'My Instance',
+    webhookUrl: 'https://my.url.com/webhook',
+    webhookEvents: WebhookEvent::ALL
+);
+```
+
+| Event | Description |
+|:------|:------------|
+| `message` | Fired when you receive a message |
+| `message_create` | New message created (sent and received) |
+| `message_edit` | A message was edited |
+| `message_ack` | Message was read or received |
+| `message_reaction` | Reaction sent, received, updated or removed |
+| `message_revoke_everyone` | Message deleted for everyone |
+| `message_revoke_me` | Message deleted for you only |
+| `media_uploaded` | Media file uploaded successfully |
+| `qr` | New QR code available |
+| `authenticated` | Connection successfully established |
+| `auth_failure` | Authentication failed |
+| `ready` | Instance is ready to use |
+| `disconnected` | Instance was disconnected |
+| `loading_screen` | Instance is loading data |
+| `change_state` | Connection status changed |
+| `group_join` | Someone joined or was added to a group |
+| `group_leave` | Someone left or was removed from a group |
+| `group_update` | Group information was updated |
+| `call` | Incoming call (cannot be handled by API) |
+| `vote_update` | Poll vote was updated or removed |
 
 ## License
 
