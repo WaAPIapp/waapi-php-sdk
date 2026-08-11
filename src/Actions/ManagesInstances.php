@@ -10,6 +10,7 @@ use WaAPI\WaAPISdk\Resources\Instance;
 use WaAPI\WaAPISdk\Resources\InstanceClientMe;
 use WaAPI\WaAPISdk\Resources\InstanceClientQrCode;
 use WaAPI\WaAPISdk\Resources\InstanceClientStatus;
+use WaAPI\WaAPISdk\Resources\WebhookSubscription;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -195,6 +196,65 @@ trait ManagesInstances
         $data = $this->post("api/v1/instances/{$instanceId}/client/action/{$actionName}", $requestData)['data'];
 
         return new ExecutedAction($data, $this);
+    }
+
+    /**
+     * Get the webhook subscriptions registered on an instance.
+     *
+     * @param int|string $instanceId
+     * @return WebhookSubscription[]
+     *
+     * @throws Exception | FailedActionException | NotFoundException | ValidationException | GuzzleException
+     */
+    public function listWebhookSubscriptions($instanceId)
+    {
+        return $this->transformCollection(
+            $this->get("api/v1/instances/{$instanceId}/webhooks", false)['data'],
+            WebhookSubscription::class,
+            ['instanceId' => $instanceId]
+        );
+    }
+
+    /**
+     * Subscribe a URL to receive instance events. Subscribing an already-registered
+     * URL again returns the existing subscription instead of creating a duplicate.
+     *
+     * @param int|string $instanceId
+     * @param string $url
+     * @param string[] $events
+     * @param string|null $source Who is registering this subscription (zapier, make, n8n or api). Defaults to api.
+     * @return WebhookSubscription
+     *
+     * @throws Exception | FailedActionException | NotFoundException | ValidationException | GuzzleException
+     */
+    public function createWebhookSubscription($instanceId, $url, $events, $source = null)
+    {
+        $payload = [
+            'url' => $url,
+            'events' => $events,
+        ];
+
+        if ($source !== null) {
+            $payload['source'] = $source;
+        }
+
+        $data = $this->post("api/v1/instances/{$instanceId}/webhooks", $payload, false)['data'];
+
+        return new WebhookSubscription($data + ['instanceId' => $instanceId], $this);
+    }
+
+    /**
+     * Remove a webhook subscription from an instance.
+     *
+     * @param int|string $instanceId
+     * @param int|string $subscriptionId
+     * @return void
+     *
+     * @throws Exception | FailedActionException | NotFoundException | ValidationException | GuzzleException
+     */
+    public function deleteWebhookSubscription($instanceId, $subscriptionId)
+    {
+        $this->delete("api/v1/instances/{$instanceId}/webhooks/{$subscriptionId}");
     }
 
 }

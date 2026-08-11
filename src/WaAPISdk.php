@@ -39,7 +39,6 @@ class WaAPISdk
      * Create a new WhatsAppSdk instance.
      *
      * @param  string|null  $apiKey
-     * @param  bool  $testMode
      * @param  HttpClient|null  $guzzle
      * @return void
      */
