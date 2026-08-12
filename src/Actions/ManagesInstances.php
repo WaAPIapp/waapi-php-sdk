@@ -206,7 +206,7 @@ trait ManagesInstances
      *
      * @throws Exception | FailedActionException | NotFoundException | ValidationException | GuzzleException
      */
-    public function listWebhookSubscriptions($instanceId)
+    public function getWebhookSubscriptions($instanceId)
     {
         return $this->transformCollection(
             $this->get("api/v1/instances/{$instanceId}/webhooks", false)['data'],
