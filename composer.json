@@ -1,7 +1,13 @@
 {
     "name": "waapi/waapi-php-sdk",
     "description": "The official EAZE WhatsApp PHP SDK",
-    "keywords": ["eaze", "whatsapp", "api", "sdk", "library"],
+    "keywords": [
+        "eaze",
+        "whatsapp",
+        "api",
+        "sdk",
+        "library"
+    ],
     "type": "library",
     "license": "MIT",
     "autoload": {
@@ -22,9 +28,9 @@
         "phpstan/phpstan": "^1.8|^2.0"
     },
     "require": {
-        "php": "^7.2|^8.0",
+        "php": "^8.2",
         "ext-json": "*",
-        "guzzlehttp/guzzle": "^6.3.1|^7.5"
+        "guzzlehttp/guzzle": "^7.5"
     },
     "config": {
         "sort-packages": true
