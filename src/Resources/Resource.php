@@ -4,6 +4,16 @@ namespace WaAPI\WaAPISdk\Resources;
 
 use WaAPI\WaAPISdk\WaAPISdk;
 
+/**
+ * Resources are filled from whatever the API returns, so their properties are
+ * not knowable at author time -- fill() assigns every key of the response.
+ *
+ * PHP 8.2 deprecated creating properties that are not declared, and PHP 9 will
+ * make it an error. The attribute states the intent explicitly instead of
+ * leaving a deprecation for whoever raises the floor next; it surfaced the
+ * moment this package required 8.2, having been silently true for years.
+ */
+#[\AllowDynamicProperties]
 class Resource
 {
     /**
