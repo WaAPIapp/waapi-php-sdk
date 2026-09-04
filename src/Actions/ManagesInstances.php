@@ -810,7 +810,7 @@ trait ManagesInstances
     public function pinMessage(
         int $instanceId,
         string $messageId,
-        int|null $duration = null
+        ?int $duration = null
     ) {
         return $this->executeInstanceAction($instanceId, 'pin-message', compact('messageId', 'duration'));
     }
