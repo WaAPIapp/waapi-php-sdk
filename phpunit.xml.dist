@@ -11,7 +11,7 @@
          stopOnFailure="false"
 >
     <testsuites>
-        <testsuite name="EAZE WhatsApp PHP SDK Test Suite">
+        <testsuite name="WaAPI PHP SDK Test Suite">
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>

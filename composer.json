@@ -1,12 +1,14 @@
 {
     "name": "waapi/waapi-php-sdk",
-    "description": "The official EAZE WhatsApp PHP SDK",
+    "description": "Official PHP SDK for the WaAPI REST API",
     "keywords": [
-        "eaze",
-        "whatsapp",
+        "waapi",
+        "messaging",
         "api",
         "sdk",
-        "library"
+        "automation",
+        "chatbot",
+        "php"
     ],
     "type": "library",
     "license": "MIT",

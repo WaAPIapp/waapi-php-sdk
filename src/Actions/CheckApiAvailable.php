@@ -12,7 +12,7 @@ trait CheckApiAvailable
 {
 
     /**
-     * Check if the EAZE API is available.
+     * Check if the WaAPI API is available.
      *
      * @return bool
      *

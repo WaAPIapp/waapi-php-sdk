@@ -13,7 +13,7 @@ use Psr\Http\Message\ResponseInterface;
 trait MakesHttpRequests
 {
     /**
-     * Make a GET request to EAZE servers and return the response.
+     * Make a GET request to the WaAPI API and return the response.
      *
      * @param string $uri
      * @param bool $checkBodyStatus
@@ -31,7 +31,7 @@ trait MakesHttpRequests
     }
 
     /**
-     * Make a POST request to EAZE servers and return the response.
+     * Make a POST request to the WaAPI API and return the response.
      *
      * @param string $uri
      * @param array $payload
@@ -50,7 +50,7 @@ trait MakesHttpRequests
     }
 
     /**
-     * Make a PUT request to EAZE servers and return the response.
+     * Make a PUT request to the WaAPI API and return the response.
      *
      * @param string $uri
      * @param array $payload
@@ -69,7 +69,7 @@ trait MakesHttpRequests
     }
 
     /**
-     * Make a DELETE request to EAZE servers and return the response.
+     * Make a DELETE request to the WaAPI API and return the response.
      *
      * @param string $uri
      * @param array $payload
@@ -88,7 +88,7 @@ trait MakesHttpRequests
     }
 
     /**
-     * Make request to EAZE servers and return the response.
+     * Make request to the WaAPI API and return the response.
      *
      * @param string $verb
      * @param string $uri

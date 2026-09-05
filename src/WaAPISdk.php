@@ -15,7 +15,7 @@ class WaAPISdk
     private const BASE_URL = 'https://waapi.app';
 
     /**
-     * The EAZE WhatsApp API Key,
+     * The WaAPI API token,
      *
      * @var string
      */
