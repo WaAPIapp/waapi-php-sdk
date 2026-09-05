@@ -241,3 +241,27 @@ $sdk->createInstance(
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
+## Errors
+
+A successful HTTP exchange is not proof the action happened. The API answers
+with two status fields:
+
+| Field | Answers |
+|---|---|
+| `status` | did the request reach the instance |
+| `data.status` | did the instance carry the action out — **the authoritative one** |
+
+A malformed chat ID comes back as HTTP 200 with `status: success` and
+`data.status: error`, and nothing was sent. The SDK throws
+`FailedActionException` on either envelope, carrying the API's message and
+explanation, so neither case reaches you looking like success.
+
+```php
+use WaAPI\WaAPISdk\Exceptions\FailedActionException;
+
+try {
+    $sdk->executeInstanceAction($instanceId, 'send-message', ['chatId' => $chatId, 'message' => $text]);
+} catch (FailedActionException $e) {
+    // "incorrect chatId format. ("bogus" is missing a domain, expected <id>@c.us.)"
+}
+```

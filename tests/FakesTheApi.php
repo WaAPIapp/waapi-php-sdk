@@ -25,9 +25,10 @@ trait FakesTheApi
     protected array $recorded = [];
 
     /**
-     * `status` belongs at the TOP level of the body, not inside `data`:
-     * MakesHttpRequests checks $body['status'] === 'success' there and throws
-     * the raw body as an exception otherwise.
+     * The API answers with two status fields. The top-level `status` says the
+     * request reached the instance; `data.status` says the instance carried
+     * the action out, and that inner one is authoritative. This helper fakes
+     * a carried-out action; fakeRefusedAction() fakes the other case.
      *
      * @param  array<string, mixed>  $data
      */
@@ -42,6 +43,31 @@ trait FakesTheApi
                 'status' => 'success',
                 'data' => $data + ['id' => 1],
             ], JSON_THROW_ON_ERROR),
+        )));
+
+        $stack = HandlerStack::create($mock);
+        $stack->push(Middleware::history($this->recorded));
+
+        return new WaAPISdk('test-token', new Client(['handler' => $stack]));
+    }
+
+    /**
+     * The request reached the instance (outer status success) but the
+     * instance refused the action (data.status error). Nothing was sent.
+     */
+    protected function fakeRefusedAction(string $message, ?string $explanation = null): WaAPISdk
+    {
+        $this->recorded = [];
+
+        $data = ['status' => 'error', 'message' => $message];
+        if ($explanation !== null) {
+            $data['explanation'] = $explanation;
+        }
+
+        $mock = new MockHandler(array_fill(0, 5, new Response(
+            200,
+            ['Content-Type' => 'application/json'],
+            json_encode(['status' => 'success', 'data' => $data], JSON_THROW_ON_ERROR),
         )));
 
         $stack = HandlerStack::create($mock);

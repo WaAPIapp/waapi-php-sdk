@@ -126,6 +126,22 @@ trait MakesHttpRequests
             if ($status != 'success') {
                 return $this->handleRequestError($response);
             }
+
+            // Two envelopes, and the inner one is the authoritative answer:
+            //   status        did the request reach the instance
+            //   data.status   did the instance carry the action out
+            // A malformed chatId comes back as HTTP 200, status success,
+            // data.status error -- nothing was sent. Checking only the outer
+            // field reported that as a delivered message. `data` is a list for
+            // some actions and carries no status then; only an explicit
+            // inner "error" is a refusal.
+            $data = $responseBodyArr['data'] ?? null;
+            if (is_array($data) && ($data['status'] ?? null) === 'error') {
+                $reason = $data['message'] ?? 'The instance did not carry the action out.';
+                $explanation = isset($data['explanation']) ? ' ('.$data['explanation'].')' : '';
+
+                throw new FailedActionException($reason.$explanation);
+            }
         }
 
         return $responseBodyArr ?: $responseBody;
