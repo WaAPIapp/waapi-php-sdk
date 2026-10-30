@@ -27,6 +27,9 @@ class WebhookEvent
     /** Raised by the platform once per failed incoming media download: the file after a retry, or a final error. */
     const MEDIA_DOWNLOAD_RETRY = 'media_download_retry';
 
+    /** Raised by the platform once per incoming media message as soon as its file is available; fetch it with downloadMedia(). */
+    const MEDIA_DOWNLOADED = 'media_downloaded';
+
     const ALL = [
         self::MESSAGE,
         self::LOADING_SCREEN,
@@ -49,5 +52,6 @@ class WebhookEvent
         self::CALL,
         self::VOTE_UPDATE,
         self::MEDIA_DOWNLOAD_RETRY,
+        self::MEDIA_DOWNLOADED,
     ];
 }

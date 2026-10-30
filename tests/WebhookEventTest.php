@@ -12,4 +12,10 @@ class WebhookEventTest extends TestCase
         $this->assertSame('media_download_retry', WebhookEvent::MEDIA_DOWNLOAD_RETRY);
         $this->assertContains('media_download_retry', WebhookEvent::ALL);
     }
+
+    public function test_media_downloaded_is_a_known_event(): void
+    {
+        $this->assertSame('media_downloaded', WebhookEvent::MEDIA_DOWNLOADED);
+        $this->assertContains('media_downloaded', WebhookEvent::ALL);
+    }
 }
