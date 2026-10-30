@@ -24,6 +24,8 @@ class WebhookEvent
     const CHANGE_STATE = 'change_state';
     const CALL = 'call';
     const VOTE_UPDATE = 'vote_update';
+    /** Raised by the platform once per failed incoming media download: the file after a retry, or a final error. */
+    const MEDIA_DOWNLOAD_RETRY = 'media_download_retry';
 
     const ALL = [
         self::MESSAGE,
@@ -46,5 +48,6 @@ class WebhookEvent
         self::CHANGE_STATE,
         self::CALL,
         self::VOTE_UPDATE,
+        self::MEDIA_DOWNLOAD_RETRY,
     ];
 }
